@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="carbon, footprint, CO2">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            min-height: 100vh;
+            background-color: rgba(64, 94, 54, 0.39);
+        }
+
+        #header {
+            width: 100%;
+            height: 60px;
+            background-color: #284732;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        #dailyactivity-form {
+            display: flex;
+            flex-direction: column;
+            width: 53%; 
+            padding: 10px 5%;
+            background-color: #56774abf;
+            background-size: cover;
+            background-position: center;
+            flex: 1; 
+            margin-top: 0px;
+            position: relative;
+            
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+            margin-bottom: 50px;
+            width:100%;
+            padding: 15px;
+            
+        }
+
+        .text-title{
+            font-size: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+        
+
+        input {
+            margin-top:5px;
+            margin-bottom: 5px;
+            margin-left: 10px;
+        }
+
+        .submit_button {
+        background-color: #466E38;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <span class="clickable-text" onclick="handleClick(1)">CO2 footprint</span>
+        </div>
+
+        
+        <div id="dailyactivity-form">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div style ="position: absolute; right:3cm">
+                    {{ daily_activity_form.datepicker.label_tag }}
+                    {{ daily_activity_form.datepicker }}
+                </div>
+        
+                <!-- Render Household Forms -->
+                <p class="text-title">Household</p>
+                {% for household_form in daily_activity_form.household_modes %}
+                    <div class="form-group" style="background-color: #c2f1b1b1; height:120px;">
+                        <div>
+                            {{ household_form.number_of_people.label_tag }}
+                            {{ household_form.number_of_people }}
+                        </div>
+                        <div>
+                            {{ household_form.size_of_housing.label_tag }}
+                            {{ household_form.size_of_housing }}
+                        </div>
+                        <div>
+                            {{ household_form.country.label_tag }}
+                            {{ household_form.country }}
+                        </div>
+                    </div>
+                {% endfor %}
+        
+                <!-- Render Lifestyle Forms -->
+                <p class="text-title">Lifestyle</p>
+                {% for lifestyle_form in daily_activity_form.lifestyle_modes %}
+                    <div class="form-group" style="background-color: #99c28a; height:50px;">
+                        <div>
+                            {{ lifestyle_form.style.label_tag }}
+                            {{ lifestyle_form.style }}
+                            
+                        </div>
+                        
+                    </div>
+                {% endfor %}
+        
+                <!-- Render Traffic Forms -->
+                <p class="text-title">Traffic Mode</p>
+                {% for traffic_form in daily_activity_form.traffic_modes %}
+                    <div class="form-group" style="background-color: #99c28a;height:80px;">
+                        <div>
+                            {{ traffic_form.mode.label_tag }}
+                            {{ traffic_form.mode }}
+                        </div>
+                        <div>
+                            {{ traffic_form.distance.label_tag }}
+                            {{ traffic_form.distance }}
+                        </div>
+                    </div>
+                {% endfor %}
+        
+                <button class="submit_button" style="align-items: center" type="submit">Submit</button>
+            </form>
+
+           
+        </div>
+    </div>
+</body>
+</html>
+
+
