@@ -1,15 +1,25 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
 <head>
     <title>{% block title %}{% endblock %}</title>
     <link href="{% static "css/style.css" %}" rel="stylesheet">
-    
 </head>
 <body>
     <div id="header">
-        <span class="logo">Log in</span>
-        <span class="logo">Log out</span>
+        <span class="logo">CO2 Footprint</span>
+
+        {% comment %} add a <span> to check the login and logout status {% endcomment %}
+        <span class='user'>
+            {% if request.user.is_authenticated %}
+                Hello {{request.user.username}}! 
+                {% comment %} url name should be identical with the name in path() of url.py {% endcomment %}
+                <a href="{% url "logout" %}"> Logout</a>
+                /<a href="{% url "change_password" %}"> Change Password</a>
+                /<a href="{% url "delete_user" %}"> Delete Account</a>
+            {% else  %}
+                <a href="{%url "login"%}">Login</a>
+            {% endif %}
+        </span>
     </div>
     <div id="content">
         {% block content %}

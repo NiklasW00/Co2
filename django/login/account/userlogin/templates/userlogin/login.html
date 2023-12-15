@@ -6,7 +6,7 @@
 <div class="container">
     <div class="form-box">
         <h1>Log-in</h1>
-        <p>Please use the following form to login:</p>
+        <p>Please use the following form to login, or <a href="{% url "register" %}">create new account</a></p>
         <form action="." method="post">
           
                 {{ form.as_p }}
@@ -14,6 +14,10 @@
           
             <div class="btn-field">
                 <p><input type="submit" value="Log in"></p>
+                {% comment %} add link to login with google {% endcomment %}
+                {% comment %} <li class = "google">
+                <a href="{% url "social:begin" "google-oauth2" %}">Login with Google</a>
+                </li> {% endcomment %}
             </div>
         </form>
     </div>
