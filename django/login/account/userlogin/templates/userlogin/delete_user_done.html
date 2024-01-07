@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock  %}
+{% block content %}
+<div class="container">
+    <div class="form-box">
+        <p>Your account has been deleted! <a href="{% url  "login" %}">Back to homepage</a>.</p>
+    </div>
+</div>
+{% endblock  %}

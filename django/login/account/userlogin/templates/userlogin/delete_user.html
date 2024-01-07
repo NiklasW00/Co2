@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+    {% block title %}Delete Account{% endblock %}
+    {% block content %}
+<div class="container">
+    <div class="form-box">
+        <h1>Delete Account</h1>
+        <p>Please enter your username and password:</p>
+        <form action="." method="POST">
+            {% comment %} {form} is defined by RemoveUser() in forms.py {% endcomment %}
+            {{ form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="delete"></p>
+        </form>
+     </div>
+</div>
+        
+{% endblock %}    
