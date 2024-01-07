@@ -35,7 +35,7 @@
             box-sizing: border-box;
         }
 
-        #dailyactivity-form {
+        #dailyactivity {
             display: flex;
             flex-direction: column;
             width: 53%; 
@@ -52,8 +52,6 @@
         .form-group {
             display: flex;
             flex-direction: column;
-            margin-top: 10px;
-            margin-bottom: 50px;
             width:100%;
             padding: 15px;
             
@@ -88,7 +86,7 @@
         </div>
 
         
-        <div id="dailyactivity-form">
+        <div id="dailyactivity">
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 
@@ -99,54 +97,56 @@
         
                 <!-- Render Household Forms -->
                 <p class="text-title">Household</p>
-                {% for household_form in daily_activity_form.household_modes %}
-                    <div class="form-group" style="background-color: #c2f1b1b1; height:120px;">
-                        <div>
-                            {{ household_form.number_of_people.label_tag }}
-                            {{ household_form.number_of_people }}
-                        </div>
-                        <div>
-                            {{ household_form.size_of_housing.label_tag }}
-                            {{ household_form.size_of_housing }}
-                        </div>
-                        <div>
-                            {{ household_form.country.label_tag }}
-                            {{ household_form.country }}
-                        </div>
+                <div class="form-group" style="background-color: #c2f1b1b1; height:120px; margin-top: 10px; margin-bottom: 30px;">
+                    <div>
+                        {{ household_form.number_of_people.label_tag }}
+                        {{ household_form.number_of_people }}
                     </div>
-                {% endfor %}
+                    <div>
+                        {{ household_form.size_of_housing.label_tag }}
+                        {{ household_form.size_of_housing }}
+                    </div>
+                    <div>
+                        {{ household_form.country.label_tag }}
+                        {{ household_form.country }}
+                    </div>
+                </div>
+                
         
                 <!-- Render Lifestyle Forms -->
                 <p class="text-title">Lifestyle</p>
-                {% for lifestyle_form in daily_activity_form.lifestyle_modes %}
-                    <div class="form-group" style="background-color: #99c28a; height:50px;">
-                        <div>
-                            {{ lifestyle_form.style.label_tag }}
-                            {{ lifestyle_form.style }}
+                <div class="form-group" style="background-color: #99c28a; height:50px;margin-top: 5px;margin-bottom: 30px;">
+                    <div>
+                        {{ lifestyle_form.style.label_tag }}
+                        {{ lifestyle_form.style }}
                             
-                        </div>
-                        
                     </div>
-                {% endfor %}
+                        
+                </div>
+                
         
                 <!-- Render Traffic Forms -->
                 <p class="text-title">Traffic Mode</p>
-                {% for traffic_form in daily_activity_form.traffic_modes %}
-                    <div class="form-group" style="background-color: #99c28a;height:80px;">
-                        <div>
-                            {{ traffic_form.mode.label_tag }}
-                            {{ traffic_form.mode }}
-                        </div>
-                        <div>
-                            {{ traffic_form.distance.label_tag }}
-                            {{ traffic_form.distance }}
-                        </div>
+                
+                <div class="form-group" style="background-color: #99c28a;height:80px;margin-top: 5px;margin-bottom: 50px;">
+                    <div>
+                        {{ traffic_form.mode.label_tag }}
+                        {{ traffic_form.mode }}
                     </div>
-                {% endfor %}
-        
+                    <div>
+                        {{ traffic_form.distance.label_tag }}
+                        {{ traffic_form.distance }}
+                    </div>
+                </div>
+                
+                <div>
+                    {% if total_emission %}
+                        <p>Total Emission: {{ total_emission }} g</p>
+                    {% endif %}
+                </div>
                 <button class="submit_button" style="align-items: center" type="submit">Submit</button>
             </form>
-
+        
            
         </div>
     </div>
