@@ -6,15 +6,15 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 
 def submit_daily_activity(request):
-    if request.method == 'POST':
+    if request.method == 'POST': #Determine whether the user has made a submission.
         daily_activity_form = DailyActivityForm(request.POST)
         lifestyle_form = Lifestyle(request.POST)
         household_form = Household(request.POST)
         traffic_form = TrafficForm(request.POST)
 
-        if daily_activity_form.is_valid() and lifestyle_form.is_valid() and household_form.is_valid() and traffic_form.is_valid():
+        if daily_activity_form.is_valid() and lifestyle_form.is_valid() and household_form.is_valid() and traffic_form.is_valid(): #Validate whether the form submitted by the user is correct.
             
-            try:
+            try: #if the submitted forms are correct, then do this part
                 daily_activity = DailyActivityModel(date=daily_activity_form.cleaned_data['datepicker'])
                 daily_activity.save()
 
@@ -36,7 +36,7 @@ def submit_daily_activity(request):
 
                 total_emission = 0
 
-            
+                # call the function defined in models.py to calculate carbon emissions.
                 total_emission = (lifestyle.calculate_emission() + 
                                     traffic.calculate_emission() + 
                                     household.calculate_emission())
@@ -48,7 +48,7 @@ def submit_daily_activity(request):
 
                 
             
-            except Exception as e:
+            except Exception as e: #if the submitted forms are invalid, then return to the error
                 return HttpResponse('Error: {}'.format(e))
         
         '''
