@@ -13,9 +13,6 @@ urlpatterns = [
     #you can also use as_view() function to map html files in template folder 
     path('login/',auth_views.LoginView.as_view(template_name='userlogin/login.html'),name='login'),
     
-    # the website after successful password authentication
-    path('', views.dashboard,name='dashboard'),
-    
     #this link directs to logout site
     path('logout/',auth_views.LogoutView.as_view(template_name='userlogin/logout.html'), name ='logout'),
     
@@ -34,5 +31,27 @@ urlpatterns = [
          name='password_change_done'),
     
     # This url is set to mapping for user deletion
-    path('delete_user/', views.delete_user , name='delete_user') 
+    path('delete_user/', views.delete_user , name='delete_user') ,
+    
+    # This url is set to mapping customer email submmit form for email reset
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name ='userlogin/password_reset.html'),
+         name='reset_password'),
+    
+    # This url is mapping for sending reset email
+     path('password_reset_sent/', auth_views.PasswordResetDoneView.as_view(template_name ='userlogin/password_reset_sent.html'),
+         name='password_reset_done'),
+     
+     # Show link to password reset form in email
+     path('password/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name ='userlogin/password_reset_confirm.html'),
+         name='password_reset_confirm'),
+     
+     # Show password reset successfully changed msg 
+     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name ='userlogin/password_reset_complete.html'),
+         name='password_reset_complete'),
+     
+     # Show current user name, first and last name, email
+     path('show_userInfo/', views.show_userInfo, name='show_userInfo'),
 ]
+
+
+#template_name ='userlogin/password_reset_sent.html'

@@ -8,13 +8,14 @@ from .forms import myUserCreationForm, RemoveUser
 from django.http import HttpResponse
 
 #without login the dashboard shouldnot be shown--> need "login required" -->decorate
-@login_required
 # this function create a dashboard website after user login
 # request object store all posted imformation from browser (request.POST, request.GET)
-def dashboard(request):
-    return render(
-        request, 'userlogin/dashboard.html',
-    )
+
+#@login_required
+# def dashboard(request):
+#     return render(
+#         request, 'userlogin/dashboard.html',
+#     )
     
 
 def register(request):
@@ -69,3 +70,12 @@ def delete_user(request):
         context = {"form":form}
         return render(request,'userlogin/delete_user.html',context)
     
+    
+@login_required
+def show_userInfo(request):
+    current_user = request.user
+    return render (
+        request,
+        'userlogin/show_userInfo.html',
+        {'current_user':current_user},
+    )

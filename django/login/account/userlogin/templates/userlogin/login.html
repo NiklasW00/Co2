@@ -1,7 +1,4 @@
 {% extends "base.html" %}
-
-{% block title %}Log-in{% endblock %}
-
 {% block content %}
 <div class="container">
     <div class="form-box">
@@ -11,13 +8,10 @@
           
                 {{ form.as_p }}
                 {% csrf_token %}
-          
+                
             <div class="btn-field">
+                <p><a href="{% url "reset_password" %}">forgot your password?</a></p>
                 <p><input type="submit" value="Log in"></p>
-                {% comment %} add link to login with google {% endcomment %}
-                {% comment %} <li class = "google">
-                <a href="{% url "social:begin" "google-oauth2" %}">Login with Google</a>
-                </li> {% endcomment %}
             </div>
         </form>
     </div>

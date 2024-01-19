@@ -14,6 +14,7 @@
                 Hello {{request.user.username}}! 
                 {% comment %} url name should be identical with the name in path() of url.py {% endcomment %}
                 <a href="{% url "logout" %}"> Logout</a>
+                /<a href="{% url "show_userInfo" %}"> Profil</a>
                 /<a href="{% url "change_password" %}"> Change Password</a>
                 /<a href="{% url "delete_user" %}"> Delete Account</a>
             {% else  %}

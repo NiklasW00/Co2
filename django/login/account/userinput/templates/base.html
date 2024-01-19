@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <span class="logo">CO2 Footprint</span>
+
+        {% comment %} add a <span> to check the login and logout status {% endcomment %}
+        <span class='user'>
+        </span>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
