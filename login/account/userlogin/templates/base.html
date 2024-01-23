@@ -6,7 +6,24 @@
 </head>
 <body>
     <div id="header">
-        <span class="logo">Log in</span>
+        <span class="logo">CO2 Footprint</span>
+        <span class="dashboard">
+            <a href="{% url "dashboard" %}"> dashboard</a>&nbsp&nbsp
+            <a href="{% url "show_history" %}"> statistic</a>
+        </span>
+        {% comment %} add a <span> to check the login and logout status {% endcomment %}
+        <span class='user'>
+            {% if request.user.is_authenticated %}
+                Hello {{request.user.username}}!&nbsp&nbsp&nbsp   
+                {% comment %} url name should be identical with the name in path() of url.py {% endcomment %}
+                &nbsp<a href="{% url "show_userInfo" %}"> profil</a>
+                &nbsp<a href="{% url "change_password" %}"> change password</a>
+                &nbsp<a href="{% url "delete_user" %}"> delete account</a>
+                &nbsp<a href="{% url "logout" %}">logout</a>
+            {% else  %}
+                <a href="{%url "login"%}">Login</a>
+            {% endif %}
+        </span>
     </div>
     <div id="content">
         {% block content %}

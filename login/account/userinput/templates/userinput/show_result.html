@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}CO2 Footprint Calculator{% endblock %}
+{% block content %}
+<div class="container2">
+    <div class="form-box2">
+        <h1>CO2 Footprint Calculator</h1>
+        {% comment %} a form include two elements: date and graphic {% endcomment %}
+        <p>Your CO2 footprint at {{date}}</p>
+        <div class="image-info">
+            <image  src="data:image/png;base64, {{graphic}}">
+        </div>
+    </div>
+</div>
+{% endblock %}  

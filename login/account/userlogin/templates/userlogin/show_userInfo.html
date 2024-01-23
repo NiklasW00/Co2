@@ -1,0 +1,40 @@
+
+{% extends "base.html" %}
+
+{% block title %}User Infomation{% endblock %}
+
+{% block content %}
+<table width="50%" border="1" align='center'>
+    <tbody>
+        <tr>
+            <th width ="30">
+                Username
+            </th>
+            <th width ="30">
+                First Name
+            </th>
+            <th width ="30">
+                Last Name
+            </th>
+            <th width ="30">
+                Email
+            </th>
+        </tr>
+        <p></p>
+        <tr>
+            <td>
+                {{current_user.username}}
+            </td>
+            <td>
+                {{current_user.first_name}}
+            </td>
+            <td>
+                {{current_user.last_name}}
+            </td>
+            <td>
+                {{current_user.email}}
+            </td>
+        </tr>
+    </tbody>
+
+{% endblock %}   
